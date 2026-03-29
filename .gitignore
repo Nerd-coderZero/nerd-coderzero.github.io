@@ -1,0 +1,15 @@
+# Portfolio sub-projects — tracked in separate repos
+projects/
+blog/
+resume/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Auto-memory (internal tooling)
+.auto-memory/
