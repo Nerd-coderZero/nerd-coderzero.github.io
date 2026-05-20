@@ -67,7 +67,6 @@
     function step(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      /* ease-out cubic */
       const eased = 1 - Math.pow(1 - progress, 3);
       el.textContent = Math.round(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
@@ -104,11 +103,14 @@
     skillBarObserver.observe(el);
   });
 
-  /* --- Scroll reveal --- */
+  /* --- Scroll reveal ---
+     Uses a generous rootMargin so elements trigger before they reach
+     the viewport edge, preventing invisible-content gaps. No stagger
+     on the metrics strip — it reveals immediately as a unit. */
   const revealTargets = [
     '.section-header', '.about-portrait', '.about-text',
     '.timeline-item', '.project-card', '.post-item',
-    '.contact-text', '.contact-details', '.metrics-strip',
+    '.contact-text', '.contact-details',
   ];
   revealTargets.forEach(function (selector) {
     document.querySelectorAll(selector).forEach(function (el) {
@@ -123,13 +125,13 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
   document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
-  /* --- Staggered project card reveal --- */
+  /* --- Staggered project card reveal (capped to avoid long waits) --- */
   document.querySelectorAll('.project-card').forEach(function (card, i) {
-    card.style.transitionDelay = (i * 0.08) + 's';
+    card.style.transitionDelay = Math.min(i * 0.07, 0.35) + 's';
   });
 
   /* --- Active nav link highlight on scroll --- */
