@@ -372,14 +372,20 @@ ul { list-style: none; }
   align-items: center;
   gap: 1rem;
   margin-top: 2.5rem;
+  cursor: pointer;
+  width: fit-content;
+  transition: gap 0.2s var(--ease-out);
 }
+.hero-scroll-hint:hover { gap: 1.4rem; }
 .hero-scroll-hint span {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-faint);
+  transition: color 0.2s;
 }
+.hero-scroll-hint:hover span { color: var(--accent); }
 .scroll-line {
   width: 48px;
   height: 1px;
@@ -624,6 +630,7 @@ ul { list-style: none; }
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.25rem;
+  align-items: start;
 }
 .project-card {
   background: var(--paper-tinted);
