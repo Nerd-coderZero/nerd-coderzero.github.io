@@ -6,13 +6,15 @@
   /* --- Dark mode toggle --- */
   const root = document.documentElement;
   const stored = localStorage.getItem('theme');
+  /* apply stored preference; default (no stored value) stays dark per HTML attribute */
   if (stored) root.setAttribute('data-theme', stored);
 
   const themeBtn = document.getElementById('themeToggle');
   if (themeBtn) {
     themeBtn.addEventListener('click', function () {
       const current = root.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
+      /* dark is default; toggle to light and back */
+      const next = current === 'light' ? 'dark' : 'light';
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
