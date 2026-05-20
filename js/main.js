@@ -3,14 +3,25 @@
 (function () {
   'use strict';
 
+  /* --- Dark mode toggle --- */
+  const root = document.documentElement;
+  const stored = localStorage.getItem('theme');
+  if (stored) root.setAttribute('data-theme', stored);
+
+  const themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  }
+
   /* --- Nav scroll state --- */
   const nav = document.getElementById('nav');
   function handleNavScroll() {
-    if (window.scrollY > 20) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 20);
   }
   window.addEventListener('scroll', handleNavScroll, { passive: true });
   handleNavScroll();
@@ -44,48 +55,80 @@
   hamburger.addEventListener('click', function () {
     menuOpen ? closeMenu() : openMenu();
   });
+  mobileLinks.forEach(function (link) { link.addEventListener('click', closeMenu); });
 
-  mobileLinks.forEach(function (link) {
-    link.addEventListener('click', closeMenu);
+  /* --- Animated stat counters --- */
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1400;
+    const start = performance.now();
+
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      /* ease-out cubic */
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-num[data-count]').forEach(function (el) {
+    counterObserver.observe(el);
+  });
+
+  /* --- Skill tier bar animation --- */
+  const skillBarObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-tier-fill').forEach(function (fill) {
+          fill.classList.add('animate');
+        });
+        skillBarObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.skill-group').forEach(function (el) {
+    skillBarObserver.observe(el);
   });
 
   /* --- Scroll reveal --- */
   const revealTargets = [
-    '.section-header',
-    '.about-portrait',
-    '.about-text',
-    '.timeline-item',
-    '.project-card',
-    '.post-item',
-    '.contact-text',
-    '.contact-details',
+    '.section-header', '.about-portrait', '.about-text',
+    '.timeline-item', '.project-card', '.post-item',
+    '.contact-text', '.contact-details', '.metrics-strip',
   ];
-
   revealTargets.forEach(function (selector) {
     document.querySelectorAll(selector).forEach(function (el) {
       el.classList.add('reveal');
     });
   });
 
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-  );
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(function (el) {
-    observer.observe(el);
-  });
+  document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
 
   /* --- Staggered project card reveal --- */
-  const projectCards = document.querySelectorAll('.project-card');
-  projectCards.forEach(function (card, i) {
+  document.querySelectorAll('.project-card').forEach(function (card, i) {
     card.style.transitionDelay = (i * 0.08) + 's';
   });
 
@@ -97,19 +140,13 @@
     let currentId = '';
     sections.forEach(function (section) {
       const rect = section.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom > 100) {
-        currentId = section.getAttribute('id');
-      }
+      if (rect.top <= 100 && rect.bottom > 100) currentId = section.getAttribute('id');
     });
     navLinkEls.forEach(function (link) {
       link.style.color = '';
-      const href = link.getAttribute('href');
-      if (href === '#' + currentId) {
-        link.style.color = 'var(--accent)';
-      }
+      if (link.getAttribute('href') === '#' + currentId) link.style.color = 'var(--accent)';
     });
   }
-
   window.addEventListener('scroll', updateActiveNav, { passive: true });
 
 })();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +23,10 @@
         <li><a href="#publications">Writing</a></li>
         <li><a href="#contact" class="nav-cta">Contact</a></li>
       </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -62,17 +66,17 @@
       <div class="hero-sidebar">
         <div class="hero-stat-block">
           <div class="stat">
-            <span class="stat-num">20+</span>
+            <span class="stat-num" data-count="20" data-suffix="+">20+</span>
             <span class="stat-label">Client Projects Delivered</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">97%</span>
+            <span class="stat-num" data-count="97" data-suffix="%">97%</span>
             <span class="stat-label">Peak Model Accuracy</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat">
-            <span class="stat-num">20+</span>
+            <span class="stat-num" data-count="20" data-suffix="+">20+</span>
             <span class="stat-label">Research Associates Trained</span>
           </div>
         </div>
@@ -143,31 +147,47 @@
 
           <div class="skills-grid">
             <div class="skill-group">
-              <div class="skill-group-title">Core ML/DL</div>
+              <div class="skill-group-header">
+                <div class="skill-group-title">Core ML/DL</div>
+                <span class="skill-tier-badge expert">Expert</span>
+              </div>
+              <div class="skill-tier-bar"><div class="skill-tier-fill expert"></div></div>
               <div class="skill-tags">
                 <span>PyTorch</span><span>TensorFlow</span><span>Keras</span>
                 <span>Scikit-learn</span><span>HuggingFace</span>
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-title">Domains</div>
+              <div class="skill-group-header">
+                <div class="skill-group-title">Domains</div>
+                <span class="skill-tier-badge proficient">Proficient</span>
+              </div>
+              <div class="skill-tier-bar"><div class="skill-tier-fill proficient"></div></div>
               <div class="skill-tags">
                 <span>Medical Imaging</span><span>NLP / LLMs</span>
-                <span>Time Series</span><span>RAG Systems</span>
+                <span>Time Series</span><span>RAG Systems</span><span>Computer Vision</span>
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-title">Research</div>
+              <div class="skill-group-header">
+                <div class="skill-group-title">Research Methods</div>
+                <span class="skill-tier-badge expert">Expert</span>
+              </div>
+              <div class="skill-tier-bar"><div class="skill-tier-fill expert"></div></div>
               <div class="skill-tags">
-                <span>CNN-Transformer</span><span>Attention Mechanisms</span>
+                <span>CNN-Transformer</span><span>Attention (CBAM)</span>
                 <span>Federated Learning</span><span>GANs</span><span>AutoML</span>
               </div>
             </div>
             <div class="skill-group">
-              <div class="skill-group-title">Tools & Stack</div>
+              <div class="skill-group-header">
+                <div class="skill-group-title">Tools &amp; Stack</div>
+                <span class="skill-tier-badge proficient">Proficient</span>
+              </div>
+              <div class="skill-tier-bar"><div class="skill-tier-fill proficient"></div></div>
               <div class="skill-tags">
-                <span>Python</span><span>Java</span><span>Git</span>
-                <span>Gemini API</span><span>LangChain</span>
+                <span>Python</span><span>Git</span><span>LangChain</span>
+                <span>FAISS</span><span>Gemini API</span><span>MONAI</span>
               </div>
             </div>
           </div>
@@ -253,9 +273,37 @@
         <h2 class="section-title">Selected Projects</h2>
       </div>
       <p class="section-intro">
-        Five projects selected for technical depth, domain diversity, and relevance to current industry priorities. 
-        Client projects are presented as case studies; open-source rebuilds link directly to code.
+        Six projects selected for technical depth, domain diversity, and relevance to current industry priorities.
+        Client projects are presented as anonymised case studies; open-source and personal projects link directly to code.
       </p>
+
+      <div class="metrics-strip">
+        <div class="metric-cell">
+          <div class="metric-cell-value">97%</div>
+          <div class="metric-cell-label">Accuracy</div>
+          <div class="metric-cell-context">CNN-Transformer · Histopathology</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-cell-value">89%</div>
+          <div class="metric-cell-label">Accuracy</div>
+          <div class="metric-cell-context">CBAM-ResNet · MRI Classification</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-cell-value">86.5%</div>
+          <div class="metric-cell-label">Macro F1</div>
+          <div class="metric-cell-context">BERT · Irony Detection (1:9 imbalance)</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-cell-value">RAG</div>
+          <div class="metric-cell-label">Open Source</div>
+          <div class="metric-cell-context">LangChain · FAISS · Gemini API</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-cell-value">0.617</div>
+          <div class="metric-cell-label">AUC (Best)</div>
+          <div class="metric-cell-context">XGBoost · IPL Match Prediction</div>
+        </div>
+      </div>
 
       <div class="projects-grid">
 
@@ -274,22 +322,23 @@
             </div>
             <h3 class="project-title">Breast Cancer Detection via Hybrid CNN-Transformer</h3>
             <p class="project-desc">
-              Designed and trained a hybrid architecture combining convolutional feature extraction with 
-              Transformer self-attention for histopathology image classification. Achieved 97% accuracy 
-              on held-out test sets, substantially exceeding baseline CNN performance.
+              Hybrid architecture combining EfficientNet-B3 convolutional feature extraction with
+              Transformer cross-attention for histopathology image classification. Spatial feature maps
+              are treated as patch token sequences — enabling global context reasoning without a
+              standalone ViT backbone. Achieved 97% accuracy, +11pp over CNN-only baseline.
             </p>
             <div class="project-highlights">
               <div class="highlight">
                 <span class="highlight-label">Architecture</span>
-                <span class="highlight-val">CNN + Vision Transformer hybrid with cross-attention fusion</span>
+                <span class="highlight-val">EfficientNet-B3 → patch tokens → cross-attention → classifier</span>
               </div>
               <div class="highlight">
                 <span class="highlight-label">Dataset</span>
-                <span class="highlight-val">BreakHis / client histopathology dataset</span>
+                <span class="highlight-val">BreakHis — 7,909 images · 4 magnifications · benign/malignant</span>
               </div>
               <div class="highlight">
                 <span class="highlight-label">Framework</span>
-                <span class="highlight-val">PyTorch, timm, MONAI</span>
+                <span class="highlight-val">PyTorch · timm · MONAI augmentation pipeline</span>
               </div>
             </div>
             <div class="project-tags">
@@ -400,8 +449,8 @@
             </div>
             <h3 class="project-title">Domain-Adaptive RAG Chatbot</h3>
             <p class="project-desc">
-              Retrieval-augmented generation system with document ingestion, vector store indexing, 
-              and LLM-based answer synthesis. Built with LangChain, FAISS, and Gemini API with 
+              Retrieval-augmented generation system with document ingestion, vector store indexing,
+              and LLM-based answer synthesis. Built with LangChain, FAISS, and Gemini API with
               configurable retrieval strategies and evaluation harness.
             </p>
             <div class="project-tags">
@@ -412,6 +461,53 @@
                 View on GitHub — rag-chatbot
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6 — Personal ML Research -->
+        <article class="project-card project-ipl">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-meta">
+                <span class="project-domain">Sports Analytics / ML</span>
+                <span class="project-type project-type-open">Personal Project</span>
+              </div>
+              <div class="project-metric">
+                <span class="metric-value">0.617</span>
+                <span class="metric-label">AUC (Best)</span>
+              </div>
+            </div>
+            <h3 class="project-title">IPL Match Outcome Prediction</h3>
+            <p class="project-desc">
+              Pre-match prediction system for IPL cricket using team-level historical and structural
+              features — no ball-by-ball data. Covers feature engineering across phase-wise run rates,
+              win rate differentials, death-over economy, and venue head-to-head stats. Temporal
+              train/test split (2008–2018 train, 2019–2024 test) prevents leakage. Three classifiers
+              compared: Logistic Regression (AUC 0.617), Random Forest (0.604), XGBoost (0.600).
+              SHAP explainability and an ablation study confirm phase-wise run rates as the most
+              critical feature group. Key finding: a naive historical form baseline scores below
+              AUC 0.50 on post-2019 data, quantifying increased competitive parity in the modern IPL.
+            </p>
+            <div class="project-highlights">
+              <div class="highlight">
+                <span class="highlight-label">Split</span>
+                <span class="highlight-val">Temporal — 2008–2018 train · 2019–2024 test</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-label">Explainability</span>
+                <span class="highlight-val">SHAP + ablation — phase-wise run rates most critical</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-label">Finding</span>
+                <span class="highlight-val">Naive form baseline AUC &lt;0.50 post-2019 — confirms modern parity</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span>Python</span><span>XGBoost</span><span>Scikit-learn</span><span>SHAP</span><span>Optuna</span><span>pandas</span>
+            </div>
+            <div class="project-links">
+              <span class="link-note">Personal project — code available on request</span>
             </div>
           </div>
         </article>
