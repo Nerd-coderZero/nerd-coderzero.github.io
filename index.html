@@ -273,7 +273,7 @@
         <h2 class="section-title">Selected Projects</h2>
       </div>
       <p class="section-intro">
-        Six projects selected for technical depth, domain diversity, and relevance to current industry priorities.
+        Seven projects selected for technical depth, domain diversity, and relevance to current industry priorities.
         Client projects are presented as anonymised case studies; open-source and personal projects link directly to code.
       </p>
 
@@ -302,6 +302,11 @@
           <div class="metric-cell-value">0.617</div>
           <div class="metric-cell-label">AUC (Best)</div>
           <div class="metric-cell-context">XGBoost · IPL Match Prediction</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-cell-value">100%</div>
+          <div class="metric-cell-label">Detection Rate</div>
+          <div class="metric-cell-context">eBPF ML · Intrusion Detection</div>
         </div>
       </div>
 
@@ -505,6 +510,49 @@
             </div>
             <div class="project-tags">
               <span>Python</span><span>XGBoost</span><span>Scikit-learn</span><span>SHAP</span><span>Optuna</span><span>pandas</span>
+            </div>
+            <div class="project-links">
+              <span class="link-note">Personal project — code available on request</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7 — eBPF ML Security -->
+        <article class="project-card project-ebpf">
+          <div class="project-card-inner">
+            <div class="project-header">
+              <div class="project-meta">
+                <span class="project-domain">MLSecOps / Kubernetes</span>
+                <span class="project-type project-type-open">Personal Project</span>
+              </div>
+              <div class="project-metric">
+                <span class="metric-value">100%</span>
+                <span class="metric-label">Detection Rate</span>
+              </div>
+            </div>
+            <h3 class="project-title">eBPF ML Security Inference Engine</h3>
+            <p class="project-desc">
+              Real-time intrusion detection system using eBPF kernel event telemetry, deployed as a
+              containerised ML inference service on a Kubernetes (Kind) cluster. An ensemble of
+              Random Forest, LSTM Autoencoder, and Isolation Forest classifiers analyses sliding
+              windows of syscall and network events to detect attack patterns with sub-second latency.
+            </p>
+            <div class="project-highlights">
+              <div class="highlight">
+                <span class="highlight-label">Ensemble</span>
+                <span class="highlight-val">RF (0.62) + LSTM AE (0.28) + IF (0.10) — 0 false positives on benign workloads</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-label">Attack Classes</span>
+                <span class="highlight-val">Data exfiltration · lateral movement · cryptomining — &lt;1s inference per window</span>
+              </div>
+              <div class="highlight">
+                <span class="highlight-label">Deployment</span>
+                <span class="highlight-val">Models baked into Docker image — validated on separate client machine</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span>Python</span><span>Kubernetes</span><span>Docker</span><span>Random Forest</span><span>LSTM Autoencoder</span><span>eBPF</span><span>REST API</span>
             </div>
             <div class="project-links">
               <span class="link-note">Personal project — code available on request</span>
